@@ -47,7 +47,7 @@ if (substr($_SERVER['PHP_SELF'], 0, 7) == '/admin/') {
         <link href="assets/css/admin.css" rel="stylesheet"> 
         <link href="assets/css/admin-responsive.css" rel="stylesheet"> 
         
-        <link href="metalicious/assets/css/dashboard.css" rel="stylesheet"> 
+        <link href="assets/css/dashboard.css" rel="stylesheet"> 
         
         <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
@@ -96,7 +96,7 @@ if (substr($_SERVER['PHP_SELF'], 0, 7) == '/admin/') {
                     <span class="icon-bar"></span>
                 </a>
                 <a class="brand" href="index.php">
-                    metalicious
+                    <img src="images/metalicious_banner.png" />
                 </a>		
                 <div class="nav-collapse">
                     <?php
