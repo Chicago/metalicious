@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Metalicious by Chicago</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Metalicious</h1>
+          <h2>An open-source data dictionary which can be deployed to track the metadata of one or more databases.</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/Chicago/metalicious/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/Chicago/metalicious/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/Chicago/metalicious" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h1>Metalicious - Open Source Data Dictionary</h1>
+
+<p>Metalicious is an open-source, web-based data dictionary that is designed to capture and display metadata from databases, tables, and fields for platforms with one or more databases. Users may customize and deploy Metalicious as an internal or public data dictionary website.</p>
+
+<p>This project is a generic release of the City of Chicago's <a href="http://datadictionary.cityofchicago.org">data dictionary</a>.</p>
+
+<h1>Installation</h1>
+
+<p>Copy the repository or download a compressed folder and unpack the directory to the folder you wish to host Metalicious.</p>
+
+<h2>Importing Database</h2>
+
+<p>Using the command line, run the following script:</p>
+
+<div class="highlight"><pre>mysql -u db-username -p -h yourlocaldatabase &lt; database/Metalicious_DB.sql
+</pre></div>
+
+<p>Metalicious will create a new database called "datadictionary". Ensure no database with the same name exists as Metalicious will overwrite pre-existing data.</p>
+
+<h2>Creating Users</h2>
+
+<p>There is not a way to enter new users through the website in the current version. Adding new users will require access to the MySQL server and database. Use the following script to add new users:</p>
+
+<div class="highlight"><pre><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">Users</span>
+    <span class="p">(</span><span class="n">User_Name</span><span class="p">,</span> <span class="n">Password</span><span class="p">,</span> <span class="n">First_Name</span><span class="p">,</span> <span class="n">Last_Name</span><span class="p">)</span>
+<span class="k">VALUES</span>
+    <span class="p">(</span><span class="s1">'_username-to-be-added_'</span><span class="p">,</span> <span class="s1">'_password_'</span><span class="p">,</span> <span class="s1">'user-first-name'</span><span class="p">,</span> <span class="s1">'user-last-name'</span><span class="p">);</span>
+</pre></div>
+
+<p>Where the <em>italicized</em> arguments will be inserted into the user account.</p>
+
+<h2>Creating Business Functions</h2>
+
+<p>"Business Functions" is used to create categories to help users navigate to data dictionary entries. Currently, Metalicious does not support adding business functions through the website. Instead, new functions can be added through the following commands:</p>
+
+<div class="highlight"><pre><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">Business_Functions</span>
+    <span class="p">(</span><span class="n">Business_Function_Name</span><span class="p">,</span> <span class="n">Business_Function_Description</span><span class="p">)</span>
+<span class="k">VALUES</span>
+    <span class="p">(</span><span class="s1">'_business-function-to-be-added_'</span><span class="p">,</span> <span class="s1">'_business-function-description_'</span><span class="p">);</span>
+</pre></div>
+
+<p>The <em>italic</em> entries may be modified to fit your needs.</p>
+
+<h2>Deploying Website</h2>
+
+<p>Move the contents of /web to the directory you wish to deploy Metalicious.</p>
+
+<p>After moving the contents, configure /include/dbconnopen.php to the appropriate MySQL database and login information:</p>
+
+<div class="highlight"><pre><span class="nv">$cnnCDD</span> <span class="o">=</span> <span class="nb">mysqli_connect</span><span class="p">(</span><span class="s2">"_yourlocaldatabase_"</span><span class="p">,</span> <span class="s2">"_db-username_"</span><span class="p">,</span> <span class="s2">"_db-password_"</span><span class="p">)</span>
+</pre></div>
+
+<p>The deployment of Metalicious assumes it will be installed in the root directory of the server (e.g., DOCUMENT_ROOT). To change this behavior, modify the file location.php </p>
+
+<h2>Editing Contact Form</h2>
+
+<p>Metalicious includes a contact form for users to contact a central location. You can edit the contact information in <em>ajax/contact_send.php</em> </p>
+
+<div class="highlight"><pre><span class="nv">$to</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\"</span><span class="s2">_email-name_</span><span class="se">\"</span><span class="s2"> &lt;email-address@example.com&gt;"</span><span class="p">;</span>
+<span class="nv">$subject</span> <span class="o">=</span> <span class="s2">"Metalicious Data Dictionary: Online Comment / Question / Suggestion"</span><span class="p">;</span>
+</pre></div>
+
+<h1>Adding Data</h1>
+
+<h2>Adding a new system or revising an existing system</h2>
+
+<ol>
+<li> Log into website</li>
+<li>  Username: beginning of e+mail address (i.e. jsmith – do not include @gmail.com)</li>
+<li>  Password: same as username</li>
+<li> Open an existing database and select “Create new DB” (located at the bottom of the database detail table)</li>
+<li>  Note: Need to be in an existing database to create a new database</li>
+<li> Enter all relevant information on the system </li>
+<li> Select “Create New Database” once all information has been entered</li>
+<li>  Note: This will create the database, but it will not yet appear on the website</li>
+<li> Activate the database </li>
+<li>  Click on your name at the top of the screen and select “Admin” from the drop down</li>
+<li>  Click on the database and then select “Activate Revision”</li>
+<li>  The system will now appear on the website.  Note: The database will need to be activated in order for it to be complete and appear in the website as well as for you to add the business function.</li>
+<li> Adding the Business Function</li>
+<li>  Use the “Search” feature to open up the new database</li>
+<li>  At the end of the database detail table, select the business function where this database belongs</li>
+<li>  Follow step 7 to update the revision</li>
+<li> Making Revisions to a database</li>
+<li>  Click “Change Info” at the end of the database detail </li>
+<li>  Click “Save Revisions”</li>
+<li>  Click “Database Revisions” and click “Load this revision” next to the appropriate dated revision.</li>
+</ol><h2>Importing a table</h2>
+
+<h2>Importing a variable</h2>
+
+<ol>
+<li> Steps to take to get file ready for importing</li>
+<li>  Copy all relevant fields (system, table, column/field, type, length, value range, description, examples, comments) with no header row and paste into a separate excel file and save as CSV (comma delimited) file.</li>
+<li>  The System name in the file must match exactly how the system is named in the website.  For example, if the system is titled “Attendance System” in the website, the spreadsheet must have “Attendance System” listed under the system column.<br>
+</li>
+<li> Log into website</li>
+<li> Select “import” from the drop down list under your name </li>
+<li> Select the “browse” button under the second option - Choose your Variables.csv file and then click on the submit button</li>
+<li> Add the appropriate variable CSV file</li>
+<li> Select “submit”</li>
+</ol><h1>Requirements</h1>
+
+<p>Metalicious has not gone through broad deployment testing. Below are the specifications which this project was built. We appreciate feedback on other platforms which Metalicious does and does not operate.</p>
+
+<h2>System Requirements</h2>
+
+<p>Severs hosting this project requires. This project was developed with the following specifications:</p>
+
+<ul>
+<li>MySQL Community Server 5.5.25a</li>
+<li>PHP 5.4.5</li>
+</ul><h2>License &amp; Support</h2>
+
+<p>Metalicious is released under an MIT-style license. Portions of the design of the website uses <a href="http://fortawesome.github.com/Font-Awesome/">Font Awesome</a> in the design, which is licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>. Other licensed components of this project are compatible with an MIT license. The complete license is contained in the LICENSE file at the root of this distribution. By using this software in any fashion, you are agreeing to be bound by the terms of this license. You must not remove this notice, or any other, from this software.</p>
+
+<p>The City of Chicago and its partners do not assume liability or support of Metalicious.</p>
+
+<h2>Acknowledgements</h2>
+
+<p>Metalicious was developed with support from the <a href="http://www.macfound.org/">MacArthur Foundation</a> and <a href="http://www.chapinhall.org/">Chapin Hall at the University of Chicago</a>.</p>
+        </section>
+
+        <footer>
+          Metalicious is maintained by <a href="https://github.com/Chicago">Chicago</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
