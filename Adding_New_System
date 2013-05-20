@@ -1,0 +1,20 @@
+1.	Log into website
+-	Username: beginning of e-mail address (i.e. jsmith – do not include @gmail.com)
+-	Password: same as username
+2.	Open an existing database and select “Create new DB” (located at the bottom of the database detail table)
+-	Note: Need to be in an existing database to create a new database
+3.	Enter all relevant information on the system 
+4.	Select “Create New Database” once all information has been entered
+-	Note: This will create the database, but it will not yet appear on the website
+5.	Activate the database 
+-	Click on your name at the top of the screen and select “Admin” from the drop down
+-	Click on the database and then select “Activate Revision”
+-	The system will now appear on the website.  Note: The database will need to be activated in order for it to be complete and appear in the website as well as for you to add the business function.
+6.	Adding the Business Function
+-	Use the “Search” feature to open up the new database
+-	At the end of the database detail table, select the business function where this database belongs
+-	Follow step 7 to update the revision
+7.	Making Revisions to a database
+-	Click “Change Info” at the end of the database detail 
+-	Click “Save Revisions”
+-	Click “Database Revisions” and click “Load this revision” next to the appropriate dated revision.
