@@ -1,5 +1,5 @@
 <?php
-include 'classes/variable.php';
+include '../classes/variable.php';
 
 Variable::create_revision($_POST['Variable_ID'],
                           $_POST['Variable_Name'],
@@ -14,5 +14,5 @@ Variable::create_revision($_POST['Variable_ID'],
                           $_POST['Table_ID']);
 
 //show revisions
-include 'include/variable_revisions.php';
+include '../include/variable_revisions.php';
 ?>

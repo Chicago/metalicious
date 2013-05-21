@@ -1,5 +1,5 @@
 <?php
-include 'classes/keyword.php';
+include '../classes/keyword.php';
 
 $error = Keyword::add_keyword($_POST['Keyword'],
                                 $_POST['Element_Type'],
@@ -10,5 +10,5 @@ if ($error != '1') {
     exit;
 }
 
-include 'include/element_keywords.php';
+include '../include/element_keywords.php';
 ?>

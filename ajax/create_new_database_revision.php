@@ -1,5 +1,5 @@
 <?php
-include 'classes/database.php';
+include '../classes/database.php';
 
 Database::create_revision(
                 $_POST['Database_ID'],
@@ -14,5 +14,5 @@ Database::create_revision(
                 $_POST['Creator']);
 
 //show revisions
-include 'include/database_revisions.php';
+include '../include/database_revisions.php';
 ?>

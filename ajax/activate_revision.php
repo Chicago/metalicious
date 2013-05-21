@@ -1,7 +1,7 @@
 <?php
-include 'classes/database.php';
-include 'classes/table.php';
-include 'classes/variable.php';
+include '../classes/database.php';
+include '../classes/table.php';
+include '../classes/variable.php';
 
 //revision id
 $revision_id = $_POST['revision_id'];
