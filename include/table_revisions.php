@@ -1,5 +1,5 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] . '/classes/table.php';
+include_once '../classes/table.php';
 
 //set DB ID
 if (isset($_POST['Table_ID'])) {
@@ -87,7 +87,7 @@ if (isset($_POST['Table_ID'])) {
                                                     },
                                                     function (response){
                                                         if (response == '') {
-                                                            document.location.href = '/table_info.php?table_id=<?php echo $table_id; ?>';
+                                                            document.location.href = '../table_info.php?table_id=<?php echo $table_id; ?>';
 
                                                             //document.getElementById('message_box').innerHTML = 'Added new revision successfully';
                                                             //$('#table_message_box').slideDown('slow').delay(3000).slideUp('slow');
@@ -108,14 +108,14 @@ if (isset($_POST['Table_ID'])) {
                     <a href="javascript:;"
                        onclick="
                                $.post(
-                                    '/ajax/activate_revision.php',
+                                    '../ajax/activate_revision.php',
                                     {
                                         element_type: 'table',
                                         revision_id: <?php echo $table_revision['Table_Revision_ID']; ?>
                                     },
                                     function (response){
                                         if (response == '') {
-                                            document.location.href = '/table_info.php?table_id=<?php echo $table_id; ?>';
+                                            document.location.href = '../table_info.php?table_id=<?php echo $table_id; ?>';
 
                                             //document.getElementById('message_box').innerHTML = 'Added new revision successfully';
                                             //$('#table_message_box').slideDown('slow').delay(3000).slideUp('slow');

@@ -41,17 +41,17 @@ include 'include/header.php';
                     if ($result_element['Element_Type'] == 'Database') {
                         $database = Database::get_database_info($result_element['Element_ID']);
                         ?>
-                        <li><a href="/database_info.php?database_id=<?php echo $database['Database_ID']; ?>"><i class="icon-th-large"></i> <?php echo $database['Database_Name']; ?></a> (database)</li>
+                        <li><a href="database_info.php?database_id=<?php echo $database['Database_ID']; ?>"><i class="icon-th-large"></i> <?php echo $database['Database_Name']; ?></a> (database)</li>
                         <?php
                     } else if ($result_element['Element_Type'] == 'Table') {
                         $table = Table::get_table_info($result_element['Element_ID']);
                         ?>
-                        <li><a href="/table_info.php?table_id=<?php echo $table['Table_ID']; ?>"><i class="icon-th"></i> <?php echo $table['Table_Name']; ?></a> (table)</li>
+                        <li><a href="table_info.php?table_id=<?php echo $table['Table_ID']; ?>"><i class="icon-th"></i> <?php echo $table['Table_Name']; ?></a> (table)</li>
                         <?php
                     } else if ($result_element['Element_Type'] == 'Variable') {
                         $variable = Variable::get_variable_info($result_element['Element_ID']);
                         ?>
-                        <li><a href="/variable_info.php?variable_id=<?php echo $variable['Variable_ID']; ?>"><i class="icon-asterisk"></i> <?php echo $variable['Variable_Name']; ?></a> (variable)</li>
+                        <li><a href="variable_info.php?variable_id=<?php echo $variable['Variable_ID']; ?>"><i class="icon-asterisk"></i> <?php echo $variable['Variable_Name']; ?></a> (variable)</li>
                         <?php
                     }
                 }
@@ -80,7 +80,7 @@ include 'include/header.php';
 
                 while ($business_function = mysqli_fetch_assoc($all_business_functions)) {
                     ?>
-                    <li><a href="/business_functions.php?business_function_id=<?php echo $business_function['Business_Function_ID']; ?>"><?php echo $business_function['Business_Function_Name']; ?></a><br />
+                    <li><a href="business_functions.php?business_function_id=<?php echo $business_function['Business_Function_ID']; ?>"><?php echo $business_function['Business_Function_Name']; ?></a><br />
                     <?php
                 }
                 ?>

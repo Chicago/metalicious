@@ -13,7 +13,7 @@ if (!isset($_COOKIE['user_id']) && ($database_info['Public'] == '0')) {
 Database::add_view($_GET['database_id']);
 
 //recently viewed link
-$recently_viewed_link = '<li><a href="/database_info.php?database_id=' . $database_info['Database_ID'] . '"><i class="icon-th-large"></i> ' . $database_info['Database_Name'] . '</a> (database)</li>';
+$recently_viewed_link = '<li><a href="database_info.php?database_id=' . $database_info['Database_ID'] . '"><i class="icon-th-large"></i> ' . $database_info['Database_Name'] . '</a> (database)</li>';
 
 if (stripslashes($_COOKIE['recently_viewed'][0]) != $recently_viewed_link) {
     //add item to recently viewed
