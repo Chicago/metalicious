@@ -1,5 +1,5 @@
 <?php
-include 'classes/table.php';
+include '../classes/table.php';
 
 Table::create_revision($_POST['Table_ID'],
                        $_POST['Table_Name'],
@@ -9,5 +9,5 @@ Table::create_revision($_POST['Table_ID'],
                        $_POST['Database_ID']);
 
 //show revisions
-include 'include/table_revisions.php';
+include '../include/table_revisions.php';
 ?>
