@@ -46,8 +46,7 @@ include 'widgets.php';
 			</a>
 			
 			<a class="brand" href="./">
-				City of Chicago Data Dictionary				
-			</a>		
+				<img src="../images/metalicious_banner.png" />				</a>		
 			
 			<div class="nav-collapse">
 				<ul class="nav pull-right">
@@ -68,14 +67,7 @@ include 'widgets.php';
 						
 					</li>
 			
-					<li class="dropdown">
-						
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							<i class="icon-user"></i> 
-							Rod Howard
-							<b class="caret"></b>
-						</a>
-						
+					<li class="dropdown">	
 						<ul class="dropdown-menu">
 							<li><a href="javascript:;">My Profile</a></li>
 							<li><a href="javascript:;">My Groups</a></li>
