@@ -1,8 +1,8 @@
 <?php
-include 'classes/database.php';
-include 'classes/table.php';
-include 'classes/variable.php';
-include 'classes/keyword.php';
+include '../classes/database.php';
+include '../classes/table.php';
+include '../classes/variable.php';
+include '../classes/keyword.php';
 
 include 'include/header.php';
 ?>
@@ -130,7 +130,7 @@ include 'include/header.php';
                                                                 onclick="
                                                                         if (confirm('Are you sure you want to activate this entry?')) {
                                                                             $.post(
-                                                                                'ajax/activate_revision.php',
+                                                                                '../ajax/activate_revision.php',
                                                                                 {
                                                                                     element_type: 'database',
                                                                                     revision_id: <?php echo $orphan_database_revision['Database_Revision_ID']; ?>
@@ -164,7 +164,7 @@ include 'include/header.php';
                                                    onclick="
                                                        if (confirm('Are you sure you want to activate this entry?')) {
                                                             $.post(
-                                                                'ajax/activate_revision.php',
+                                                                '../ajax/activate_revision.php',
                                                                 {
                                                                     element_type: 'database',
                                                                     revision_id: <?php echo $orphan_database_revision['Database_Revision_ID']; ?>
@@ -297,7 +297,7 @@ include 'include/header.php';
                                                                 onclick="
                                                                     if (confirm('Are you sure you want to activate this entry?')) {
                                                                         $.post(
-                                                                            'ajax/activate_revision.php',
+                                                                            '../ajax/activate_revision.php',
                                                                             {
                                                                                 element_type: 'table',
                                                                                 revision_id: <?php echo $orphan_table_revision['Table_Revision_ID']; ?>
@@ -331,7 +331,7 @@ include 'include/header.php';
                                                    onclick="
                                                         if (confirm('Are you sure you want to activate this entry?')) {
                                                             $.post(
-                                                                'ajax/activate_revision.php',
+                                                                '../ajax/activate_revision.php',
                                                                 {
                                                                     element_type: 'table',
                                                                     revision_id: <?php echo $orphan_table_revision['Table_Revision_ID']; ?>
@@ -508,7 +508,7 @@ include 'include/header.php';
                                                                 onclick="
                                                                     if (confirm('Are you sure you want to activate this entry?')) {
                                                                         $.post(
-                                                                            'ajax/activate_revision.php',
+                                                                            '../ajax/activate_revision.php',
                                                                             {
                                                                                 element_type: 'variable',
                                                                                 revision_id: <?php echo $orphan_variable_revision['Variable_Revision_ID']; ?>
@@ -542,7 +542,7 @@ include 'include/header.php';
                                                    onclick="
                                                         if (confirm('Are you sure you want to activate this entry?')) {
                                                             $.post(
-                                                                'ajax/activate_revision.php',
+                                                                '../ajax/activate_revision.php',
                                                                 {
                                                                     element_type: 'variable',
                                                                     revision_id: <?php echo $orphan_variable_revision['Variable_Revision_ID']; ?>
@@ -563,7 +563,7 @@ include 'include/header.php';
                                                         }"><i class="icon-ok"></i></a>
                                             <a href="javascript:;" onclick="if (confirm('Are you sure you want to delete this entry?')) {
                                                                                 $.post(
-                                                                                    'ajax/delete_revision.php',
+                                                                                    '../ajax/delete_revision.php',
                                                                                     {
                                                                                         element_type: 'variable',
                                                                                         revision_id: <?php echo $orphan_variable_revision['Variable_Revision_ID']; ?>
@@ -749,7 +749,7 @@ include 'include/header.php';
                                         <input type="button" name="add_user_privilege" id="add_user_privilege" value="Add Privilege" class="btn btn-primary pull-left"
                                                onclick="
                                                     $.post(
-                                                        'ajax/add_user_user_type.php',
+                                                        '../ajax/add_user_user_type.php',
                                                         {
                                                             User_ID: document.getElementById('User_ID').options[document.getElementById('User_ID').selectedIndex].value,
                                                             User_Type_ID: document.getElementById('User_Type_ID').options[document.getElementById('User_Type_ID').selectedIndex].value
