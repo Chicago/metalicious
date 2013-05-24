@@ -1,7 +1,7 @@
 <?php
-include 'classes/database.php';
-include 'classes/table.php';
-include 'classes/variable.php';
+include '../classes/database.php';
+include '../classes/table.php';
+include '../classes/variable.php';
 
 function convert_string($string) {
     //converts smart quotes / dashes to normal quotes / dashes.
@@ -27,7 +27,7 @@ if (!isset($_POST['posted'])) {
     <br />
     Choose your Meta Data file and then click on the submit button.
 
-    <form action="admin/import.php" method="post" enctype="multipart/form-data">
+    <form action="../admin/import.php" method="post" enctype="multipart/form-data">
         1. <input type="file" name="database_descriptions_file" /><br /><br />
             <input type="hidden" name="posted" />
         2. <input type="submit" value="submit" />
@@ -36,7 +36,7 @@ if (!isset($_POST['posted'])) {
     <hr />
     <br />
     Choose your Table Descriptions file and then click on the submit button.
-    <form action="admin/import.php" method="post" enctype="multipart/form-data">
+    <form action="../admin/import.php" method="post" enctype="multipart/form-data">
         1. <input type="file" name="table_descriptions_file" /><br /><br />
         2. Select Overwrite / Skip Existing Items:<br />
             <select name="table_descriptions_overwrite_skip" id="table_descriptions_overwrite_skip">
@@ -50,7 +50,7 @@ if (!isset($_POST['posted'])) {
     <hr />
     <br />
     Choose your Variables .csv file and then click on the submit button.
-    <form action="admin/import.php" method="post" enctype="multipart/form-data">
+    <form action="../admin/import.php" method="post" enctype="multipart/form-data">
         1. <input type="file" name="variable_descriptions_file" /><br /><br />
         2. Select Overwrite / Skip Existing Items:<br />
             <select name="variable_overwrite_skip" id="variable_overwrite_skip">
@@ -179,7 +179,7 @@ if (!isset($_POST['posted'])) {
             print "$key = $val\n";
 
             //open DB
-            include 'include/dbconnopen.php';
+            include '../include/dbconnopen.php';
             $imported_record = mysqli_query($cnnCDD, "Call 0_Import_Database__Create_Database('"
                                                 . addslashes($val)
                                                 . "','" //. addslashes($description)
@@ -198,7 +198,7 @@ if (!isset($_POST['posted'])) {
             }
 
             //close DB
-            include ('include/dbconnclose.php');
+            include ('../include/dbconnclose.php');
         }
         //print_r($dbs);
 
@@ -210,7 +210,7 @@ if (!isset($_POST['posted'])) {
             }
 
             //open DB
-            include 'include/dbconnopen.php';
+            include '../include/dbconnopen.php';
             $imported_record = mysqli_query($cnnCDD, "Call 0_Import_Table__Create_Table('"
                                             . addslashes($val[1])
                                             . "','" //. addslashes($table_description)
@@ -225,7 +225,7 @@ if (!isset($_POST['posted'])) {
             }
 
             //close DB
-            include ('include/dbconnclose.php');
+            include ('../include/dbconnclose.php');
         }
         //print_r($tables);
 
@@ -237,7 +237,7 @@ if (!isset($_POST['posted'])) {
             }
 
             //open DB
-            include 'include/dbconnopen.php';
+            include '../include/dbconnopen.php';
             $imported_record = mysqli_query($cnnCDD, "Call 0_Import_Variable__Create_Variable('"
                                                 . addslashes($val[1])
                                                 . "','" . addslashes($val[2])
@@ -255,7 +255,7 @@ if (!isset($_POST['posted'])) {
             }
 
             //close DB
-            include ('include/dbconnclose.php');
+            include ('../include/dbconnclose.php');
         }
         //print_r($variables);
         echo "</pre>";
@@ -294,7 +294,7 @@ if (!isset($_POST['posted'])) {
             */
             
             //open DB
-            include 'include/dbconnopen.php';
+            include '../include/dbconnopen.php';
             
             //overwrite / skip existing records
             if ($_POST['table_descriptions_overwrite_skip'] == 'Overwrite') {
@@ -327,7 +327,7 @@ if (!isset($_POST['posted'])) {
             }
             
             //close DB
-            include ('include/dbconnclose.php');
+            include ('../include/dbconnclose.php');
         }
         
         echo "<a href=\"./import.php\">Import Another</a>";
@@ -365,7 +365,7 @@ if (!isset($_POST['posted'])) {
             echo "Comments: " . ((isset($data[8])) ? $data[8] : "") . "<br /><br />";
             
             //open DB
-            include 'include/dbconnopen.php';
+            include '../include/dbconnopen.php';
             
             //overwrite / skip existing records
             if ($_POST['variable_overwrite_skip'] == 'Overwrite') {
@@ -404,7 +404,7 @@ if (!isset($_POST['posted'])) {
             }
             
             //close DB
-            include ('include/dbconnclose.php');
+            include ('../include/dbconnclose.php');
         }
         
         echo "<a href=\"./import.php\">Import Another</a>";
@@ -421,17 +421,17 @@ if (!isset($_POST['posted'])) {
         if ($result_element['Element_Type'] == 'Database') {
             $database = Database::get_database_info($result_element['Element_ID']);
             ?>
-            <a href="/database_info.php?database_id=<?php echo $database['Database_ID']; ?>"><i class="icon-th-large"></i> <?php echo $database['Database_Name']; ?></a> (database)<br />
+            <a href="../database_info.php?database_id=<?php echo $database['Database_ID']; ?>"><i class="icon-th-large"></i> <?php echo $database['Database_Name']; ?></a> (database)<br />
             <?php
         } else if ($result_element['Element_Type'] == 'Table') {
             $table = Table::get_table_info($result_element['Element_ID']);
             ?>
-            <a href="/table_info.php?table_id=<?php echo $table['Table_ID']; ?>"><i class="icon-th"></i> <?php echo $table['Table_Name']; ?></a> (table)<br />
+            <a href="../table_info.php?table_id=<?php echo $table['Table_ID']; ?>"><i class="icon-th"></i> <?php echo $table['Table_Name']; ?></a> (table)<br />
             <?php
         } else if ($result_element['Element_Type'] == 'Variable') {
             $variable = Variable::get_variable_info($result_element['Element_ID']);
             ?>
-            <a href="/variable_info.php?variable_id=<?php echo $variable['Variable_ID']; ?>"><i class="icon-asterisk"></i> <?php echo $variable['Variable_Name']; ?></a> (variable)<br />
+            <a href="../variable_info.php?variable_id=<?php echo $variable['Variable_ID']; ?>"><i class="icon-asterisk"></i> <?php echo $variable['Variable_Name']; ?></a> (variable)<br />
             <?php
         }
     }
