@@ -3,7 +3,7 @@ include '../classes/database.php';
 include '../classes/table.php';
 include '../classes/variable.php';
 include '../classes/keyword.php';
-
+include '../classes/user.php';
 include 'include/header.php';
 ?>
 <div>
