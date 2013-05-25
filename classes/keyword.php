@@ -24,11 +24,11 @@ class Keyword
     public static function get_all_keywords()
     {
         //open DB
-        include 'include/dbconnopen.php';
+        include '../include/dbconnopen.php';
         $all_keywords = mysqli_query($cnnCDD, "Call Keyword__Get_All_Keywords()");
         
         //close DB
-        include 'include/dbconnclose.php';
+        include '../include/dbconnclose.php';
         
         //return all keywords
         return $all_keywords;
@@ -48,13 +48,13 @@ class Keyword
                                         $element_id)
     {
         //open DB
-        include 'include/dbconnopen.php';
+        include '../include/dbconnopen.php';
         $error = mysqli_query($cnnCDD, "Call Keyword__Add_Keyword('" . addslashes($keyword)
                                                 . "','" . $element_type
                                                 . "'," . $element_id . ")");
         
         //close DB
-        include 'include/dbconnclose.php';
+        include '../include/dbconnclose.php';
         return $error;
     }
    
@@ -72,13 +72,13 @@ class Keyword
                                         $element_id)
     {
         //open DB
-        include 'include/dbconnopen.php';
+        include '../include/dbconnopen.php';
         mysqli_query($cnnCDD, "Call Keyword__Remove_Keyword('" . addslashes($keyword)
                                                 . "','" . $element_type
                                                 . "'," . $element_id . ")");
         
         //close DB
-        include 'include/dbconnclose.php';
+        include '../include/dbconnclose.php';
     }
 }
 ?>

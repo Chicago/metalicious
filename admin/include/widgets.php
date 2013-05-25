@@ -5,9 +5,9 @@
  * @package WidgetFactory
  */
 
-include "ec2-50-112-41-203.us-west-2.compute.amazonaws.com/metalicious/classes/database.php";
-include "../../classes/table.php";
-include "../../classes/variable.php";
+include 'ec2-50-112-41-203.us-west-2.compute.amazonaws.com/metalicious/classes/database.php';
+include '../../classes/table.php';
+include '../../classes/variable.php';
 
 /*********************************
  * Base class for admin widgets. 

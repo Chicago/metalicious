@@ -28,11 +28,11 @@ class User
     public static function get_all_users()
     {
         //open DB
-        include 'include/dbconnopen.php';
+        include '../include/dbconnopen.php';
         $all_users = mysqli_query($cnnCDD, "Call User__Get_All_Users()");
         
         //close DB
-        include 'include/dbconnclose.php';
+        include '../include/dbconnclose.php';
         
         //return all users
         return $all_users;
@@ -46,11 +46,11 @@ class User
     public static function get_all_user_types()
     {
         //open DB
-        include 'include/dbconnopen.php';
+        include '../include/dbconnopen.php';
         $all_user_types = mysqli_query($cnnCDD, "Call User__Get_All_User_Types()");
         
         //close DB
-        include 'include/dbconnclose.php';
+        include '../include/dbconnclose.php';
         
         //return all users
         return $all_user_types;
@@ -66,11 +66,11 @@ class User
     public static function get_user_info($user_id)
     {
         //open DB
-        include 'include/dbconnopen.php';
+        include '../include/dbconnopen.php';
         $user_info = mysqli_query($cnnCDD, "Call User__Get_User_Info(" . $user_id . ")");
         
         //close DB
-        include 'include/dbconnclose.php';
+        include '../include/dbconnclose.php';
         
         //return user info
         return mysqli_fetch_assoc($user_info);
@@ -86,7 +86,7 @@ class User
     public static function get_users_user_types($user_id)
     {
         //open DB
-        include 'include/dbconnopen.php';
+        include '../include/dbconnopen.php';
         $users_user_types = mysqli_query($cnnCDD, "Call User__Get_Users_User_Types(" . $user_id . ")");
         
         $users_user_types_array = array();
@@ -96,7 +96,7 @@ class User
         }
         
         //close DB
-        include 'include/dbconnclose.php';
+        include '../include/dbconnclose.php';
         
         //return user users
         return $users_user_types_array;
@@ -114,11 +114,11 @@ class User
     public static function validate_login($username, $password)
     {
         //open DB
-        include 'include/dbconnopen.php';
+        include '../include/dbconnopen.php';
         $user_info = mysqli_query($cnnCDD, "Call User__Validate_Login('" . $username . "', '" . $password . "')");
         
         //close DB
-        include 'include/dbconnclose.php';
+        include '../include/dbconnclose.php';
         
         //return user users
         return $user_info;
@@ -133,12 +133,12 @@ class User
     public static function add_user_user_type($user_id, $user_type_id)
     {
         //open DB
-        include 'include/dbconnopen.php';
+        include '../include/dbconnopen.php';
         mysqli_query($cnnCDD, "Call User__Add_User_User_Type(" . $user_id
                                                         . "," . $user_type_id . ")");
         
         //close DB
-        include 'include/dbconnclose.php';
+        include '../include/dbconnclose.php';
     }
 }
 ?>
