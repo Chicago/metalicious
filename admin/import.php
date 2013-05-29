@@ -36,7 +36,7 @@ if (!isset($_POST['posted'])) {
     <hr />
     <br />
     Choose your Table Descriptions file and then click on the submit button.
-    <form action="../admin/import.php" method="post" enctype="multipart/form-data">
+    <form action="import.php" method="post" enctype="multipart/form-data">
         1. <input type="file" name="table_descriptions_file" /><br /><br />
         2. Select Overwrite / Skip Existing Items:<br />
             <select name="table_descriptions_overwrite_skip" id="table_descriptions_overwrite_skip">
@@ -50,7 +50,7 @@ if (!isset($_POST['posted'])) {
     <hr />
     <br />
     Choose your Variables .csv file and then click on the submit button.
-    <form action="../admin/import.php" method="post" enctype="multipart/form-data">
+    <form action="import.php" method="post" enctype="multipart/form-data">
         1. <input type="file" name="variable_descriptions_file" /><br /><br />
         2. Select Overwrite / Skip Existing Items:<br />
             <select name="variable_overwrite_skip" id="variable_overwrite_skip">
@@ -260,7 +260,7 @@ if (!isset($_POST['posted'])) {
         //print_r($variables);
         echo "</pre>";
         
-        echo "<a href=\"./import.php\">Import Another</a>";
+        echo "<a href=\"import.php\">Import Another</a>";
 
         
     } else if (isset($_FILES['table_descriptions_file'])) {
@@ -330,7 +330,7 @@ if (!isset($_POST['posted'])) {
             include ('../include/dbconnclose.php');
         }
         
-        echo "<a href=\"./import.php\">Import Another</a>";
+        echo "<a href=\"import.php\">Import Another</a>";
         
         
         
@@ -407,7 +407,7 @@ if (!isset($_POST['posted'])) {
             include ('../include/dbconnclose.php');
         }
         
-        echo "<a href=\"./import.php\">Import Another</a>";
+        echo "<a href=\"import.php\">Import Another</a>";
 
     }
 }

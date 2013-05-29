@@ -7,7 +7,7 @@ include 'widgets.php';
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Dashboard - Bootstrap Admin</title>
+    <title>Dashboard</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">    
@@ -45,7 +45,7 @@ include 'widgets.php';
 				<span class="icon-bar"></span>
 			</a>
 			
-			<a class="brand" href="./">
+			<a class="brand" href="../">
 				<img src="../images/metalicious_banner.png" />				</a>		
 			
 			<div class="nav-collapse">
@@ -103,7 +103,7 @@ include 'widgets.php';
 			<ul class="mainnav">
 			
 				<li class="active">
-					<a href="./">
+					<a href="../">
 						<i class="icon-home"></i>
 						<span>Home</span>
 					</a>	    				

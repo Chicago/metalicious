@@ -35,7 +35,7 @@ include 'include/header.php';
                 //close DB
                 include ('include/dbconnclose.php');                
                 ?>
-                <?php
+               <?php
                 while ($result_element = mysqli_fetch_assoc($most_viewed_results)) {
                     //if element is a database
                     if ($result_element['Element_Type'] == 'Database') {
@@ -87,10 +87,13 @@ include 'include/header.php';
             </ul>
         </div>
         <div class="span6">
-            <h1>About the Data Dictionary</h1>
+            <h1>About Metalicious</h1>
             <p>
-                Welcome to the City of Chicago’s Data Dictionary. This website serves as a single, comprehensive database catalog for the City of Chicago and City of Chicago sister agencies. It is a resource for anyone who is interested in understanding what data is held by City agencies and departments, how and if it may be accessed, and in what formats it may be accessed. We invite you to explore the huge volume of data maintained by the City of Chicago.
+                Metalicious is an open-source, web-based data dictionary that is designed to cpature and display metadata from databases, tables, and fields for platforms with one or more datbases. Users may customize and deploy Metalicious as an internal or public data dictionary website. 
             </p>
+	    <p>
+		This project is a generic release of the City of Chicago's <a href="http://datadictionary.cityofchicago.org">data dictionary</a>.
+	   </p>
         </div>
     </div> <!-- /row -->
 

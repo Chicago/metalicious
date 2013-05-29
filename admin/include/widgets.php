@@ -5,7 +5,10 @@
  * @package WidgetFactory
  */
 
-include 'ec2-50-112-41-203.us-west-2.compute.amazonaws.com/metalicious/classes/database.php';
+/* The 'include' statements below do not point to the correct path. Including the correct path will create a "cannot redeclare class" error. Right now, it will generate a "Failed opening" warning.
+*/
+
+include '../../classes/database.php';
 include '../../classes/table.php';
 include '../../classes/variable.php';
 

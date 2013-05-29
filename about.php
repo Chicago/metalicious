@@ -12,7 +12,9 @@ include 'include/header.php';
 
             <p class="lead">
                 <h5>
-                    Welcome to the City of Chicago’s Data Dictionary. This website serves as a single, comprehensive database catalog for the City of Chicago and City of Chicago sister agencies.   It is a resource for anyone who is interested in understanding what data is held by City agencies and departments, how and if it may be accessed, and in what formats it may be accessed.   We invite you to explore the huge volume of data maintained by the City of Chicago.
+                   <p> Metalicious is an open-source, web-based data dictionary that is designed to capture and display metadata from databases, tables, and fields for platforms with one or more databases. Users may customized and deploy Metalicious as an internal or public data dicitonary website.</p>
+
+<p>This platform is used to power the City of Chicago's <a href="http://datadictionary.cityofchicago.org">data dictionary</a>.</p>
                 </h5>
             </p>
             
