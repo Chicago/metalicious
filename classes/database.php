@@ -27,11 +27,11 @@ class Database
     public static function get_all_databases()
     {
         //open DB
-        include '../include/dbconnopen.php';
+        include dirname(__FILE__) . '/../include/dbconnopen.php';
         $all_databases = mysqli_query($cnnCDD, "Call Database__Get_All_Databases()");
         
         //close DB
-        include '../include/dbconnclose.php';
+        include dirname(__FILE__) . '/../include/dbconnclose.php';
         
         //return all databases
         return $all_databases;
@@ -47,11 +47,11 @@ class Database
     public static function get_database_info($database_id)
     {
         //open DB
-        include '../include/dbconnopen.php';
+        include dirname(__FILE__) . '/../include/dbconnopen.php';
         $database_info = mysqli_query($cnnCDD, "Call Database__Get_Database_Info(" . $database_id . ")");
         
         //close DB
-        include '../include/dbconnclose.php';
+        include dirname(__FILE__) . '/../include/dbconnclose.php';
         
         //return database info
         return mysqli_fetch_assoc($database_info);
@@ -67,11 +67,11 @@ class Database
     public static function get_database_tables($database_id)
     {
         //open DB
-        include '../include/dbconnopen.php';
+        include dirname(__FILE__) . '/../include/dbconnopen.php';
         $database_tables = mysqli_query($cnnCDD, "Call Database__Get_Database_Tables(" . $database_id . ")");
         
         //close DB
-        include '../include/dbconnclose.php';
+        include dirname(__FILE__) . '/../include/dbconnclose.php';
         
         //return database tables
         return $database_tables;
@@ -96,7 +96,7 @@ class Database
                                             $creator)
     {
         //open DB
-        include '../include/dbconnopen.php';
+        include dirname(__FILE__) . '/../include/dbconnopen.php';
         mysqli_query($cnnCDD, "Call Database__Create_Revision(" . $database_id
                                             . ",'" . addslashes($database_name)
                                             . "','" . addslashes($description)
@@ -109,7 +109,7 @@ class Database
                                             . "','" . addslashes($creator) . "')");
         
         //close DB
-        include '../include/dbconnclose.php';
+        include dirname(__FILE__) . '/../include/dbconnclose.php';
     }      
     
     /**
@@ -122,11 +122,11 @@ class Database
     public static function get_database_revisions($database_id)
     {
         //open DB
-        include '../include/dbconnopen.php';
+        include dirname(__FILE__) . '/../include/dbconnopen.php';
         $database_revisions = mysqli_query($cnnCDD, "Call Database__Get_Database_Revisions(" . $database_id . ")");
         
         //close DB
-        include '../include/dbconnclose.php';
+        include dirname(__FILE__) . '/../include/dbconnclose.php';
         
         //return database revisions
         return $database_revisions;
@@ -140,11 +140,11 @@ class Database
     public static function activate_revision($revision_id)
     {
         //open DB
-        include '../include/dbconnopen.php';
+        include dirname(__FILE__) . '/../include/dbconnopen.php';
         mysqli_query($cnnCDD, "Call Database__Activate_Revision(" . $revision_id . ")");
         
         //close DB
-        include '../include/dbconnclose.php';
+        include dirname(__FILE__) . '/../include/dbconnclose.php';
     }
     
     /**
@@ -154,11 +154,11 @@ class Database
     public static function get_orphan_revisions()
     {
         //open DB
-        include '../include/dbconnopen.php';
+        include dirname(__FILE__) . '/../include/dbconnopen.php';
         $orphan_database_revisions = mysqli_query($cnnCDD, "Call Database__Get_Orphan_Revisions()");
         
         //close DB
-        include '../include/dbconnclose.php';
+        include dirname(__FILE__) . '/../include/dbconnclose.php';
         
         //return database tables
         return $orphan_database_revisions;
@@ -173,11 +173,11 @@ class Database
     public static function delete_database_table_relationship($database_table_id)
     {
         //open DB
-        include '../include/dbconnopen.php';
+        include dirname(__FILE__) . '/../include/dbconnopen.php';
         mysqli_query($cnnCDD, "Call Database__Delete_Database_Table_Relationship(" . $database_table_id . ")");
         
         //close DB
-        include '../include/dbconnclose.php';
+        include dirname(__FILE__) . '/../include/dbconnclose.php';
     }
     
     /**
@@ -190,13 +190,13 @@ class Database
                                                                 $table_id)
     {
         //open DB
-        include '../include/dbconnopen.php';
+        include dirname(__FILE__) . '/../include/dbconnopen.php';
         $error = mysqli_query($cnnCDD, "Call Database__Create_Database_Table_Relationship('"
                                                                 . addslashes($database_name) . "',"
                                                                 . $table_id . ")");
         
         //close DB
-        include '../include/dbconnclose.php';
+        include dirname(__FILE__) . '/../include/dbconnclose.php';
         
         return $error;
     }
@@ -210,11 +210,11 @@ class Database
     public static function get_keywords($database_id)
     {
         //open DB
-        include '../include/dbconnopen.php';
+        include dirname(__FILE__) . '/../include/dbconnopen.php';
         $database_keywords = mysqli_query($cnnCDD, "Call Database__Get_Keywords(" . $database_id . ")");
         
         //close DB
-        include '../include/dbconnclose.php';
+        include dirname(__FILE__) . '/../include/dbconnclose.php';
         
         //return keywords
         return $database_keywords;
@@ -229,11 +229,11 @@ class Database
     public static function get_business_functions($database_id)
     {
         //open DB
-        include '../include/dbconnopen.php';
+        include dirname(__FILE__) . '/../include/dbconnopen.php';
         $database_business_functions = mysqli_query($cnnCDD, "Call Database__Get_Business_Functions(" . $database_id . ")");
         
         //close DB
-        include '../include/dbconnclose.php';
+        include dirname(__FILE__) . '/../include/dbconnclose.php';
         
         //return table keywords
         return $database_business_functions;
@@ -247,11 +247,11 @@ class Database
     public static function delete_revision($revision_id)
     {
         //open DB
-        include '../include/dbconnopen.php';
+        include dirname(__FILE__) . '/../include/dbconnopen.php';
         mysqli_query($cnnCDD, "Call Database__Delete_Revision(" . $revision_id . ")");
         
         //close DB
-        include '../include/dbconnclose.php';
+        include dirname(__FILE__) . '/../include/dbconnclose.php';
     }
     
     /**
@@ -263,11 +263,11 @@ class Database
     public static function add_view($database_id)
     {
         //open DB
-        include '../include/dbconnopen.php';
+        include dirname(__FILE__) . '/../include/dbconnopen.php';
         mysqli_query($cnnCDD, "Call Database__Add_View(" . $database_id . ")");
         
         //close DB
-        include '../include/dbconnclose.php';
+        include dirname(__FILE__) . '/../include/dbconnclose.php';
     }
     
     /**
@@ -279,11 +279,11 @@ class Database
     public static function toggle_public($database_id, $public)
     {
         //open DB
-        include '../include/dbconnopen.php';
+        include dirname(__FILE__) . '/../include/dbconnopen.php';
         mysqli_query($cnnCDD, "Call Database__Toggle_Public(" . $database_id .
                                                         "," . $public . ")");
         //close DB
-        include '../include/dbconnclose.php';
+        include dirname(__FILE__) . '/../include/dbconnclose.php';
     }
 }
 ?>

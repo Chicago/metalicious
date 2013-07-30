@@ -1,7 +1,7 @@
 <?php
-include '../classes/database.php';
-include '../classes/table.php';
-include '../classes/variable.php';
+include dirname(__FILE__) . '/../classes/database.php';
+include dirname(__FILE__) . '/../classes/table.php';
+include dirname(__FILE__) . '/../classes/variable.php';
 
 function convert_string($string) {
     //converts smart quotes / dashes to normal quotes / dashes.
@@ -10,7 +10,7 @@ function convert_string($string) {
     return str_replace($search, $replace, $string);
 }
 
-include 'include/header.php';
+include dirname(__FILE__) . '/include/header.php';
 ?>
 <script>
     $(document).ready(function() {
@@ -23,11 +23,11 @@ include 'include/header.php';
 <?php
 if (!isset($_POST['posted'])) {
     ?>
-    Sample Files: <a href="/CSR_Meta.txt">CSR_Meta.txt</a> - <a href="/NSR_TBLS.txt">NSR_TBLS.txt</a><br />
+    Sample Files: <a href="./CSR_Meta.txt">CSR_Meta.txt</a> - <a href="./NSR_TBLS.txt">NSR_TBLS.txt</a><br />
     <br />
     Choose your Meta Data file and then click on the submit button.
 
-    <form action="../admin/import.php" method="post" enctype="multipart/form-data">
+    <form action="import.php" method="post" enctype="multipart/form-data">
         1. <input type="file" name="database_descriptions_file" /><br /><br />
             <input type="hidden" name="posted" />
         2. <input type="submit" value="submit" />
@@ -179,7 +179,7 @@ if (!isset($_POST['posted'])) {
             print "$key = $val\n";
 
             //open DB
-            include '../include/dbconnopen.php';
+            include dirname(__FILE__) . '/../include/dbconnopen.php';
             $imported_record = mysqli_query($cnnCDD, "Call 0_Import_Database__Create_Database('"
                                                 . addslashes($val)
                                                 . "','" //. addslashes($description)
@@ -198,7 +198,7 @@ if (!isset($_POST['posted'])) {
             }
 
             //close DB
-            include ('../include/dbconnclose.php');
+            include dirname(__FILE__) . '/../include/dbconnclose.php';
         }
         //print_r($dbs);
 
@@ -210,7 +210,7 @@ if (!isset($_POST['posted'])) {
             }
 
             //open DB
-            include '../include/dbconnopen.php';
+            include dirname(__FILE__) . '/../include/dbconnopen.php';
             $imported_record = mysqli_query($cnnCDD, "Call 0_Import_Table__Create_Table('"
                                             . addslashes($val[1])
                                             . "','" //. addslashes($table_description)
@@ -225,7 +225,7 @@ if (!isset($_POST['posted'])) {
             }
 
             //close DB
-            include ('../include/dbconnclose.php');
+            include dirname(__FILE__) . '/../include/dbconnclose.php';
         }
         //print_r($tables);
 
@@ -237,7 +237,7 @@ if (!isset($_POST['posted'])) {
             }
 
             //open DB
-            include '../include/dbconnopen.php';
+            include dirname(__FILE__) . '/../include/dbconnopen.php';
             $imported_record = mysqli_query($cnnCDD, "Call 0_Import_Variable__Create_Variable('"
                                                 . addslashes($val[1])
                                                 . "','" . addslashes($val[2])
@@ -255,7 +255,7 @@ if (!isset($_POST['posted'])) {
             }
 
             //close DB
-            include ('../include/dbconnclose.php');
+            include dirname(__FILE__) . '/../include/dbconnclose.php';
         }
         //print_r($variables);
         echo "</pre>";
@@ -294,7 +294,7 @@ if (!isset($_POST['posted'])) {
             */
             
             //open DB
-            include '../include/dbconnopen.php';
+            include dirname(__FILE__) . '/../include/dbconnopen.php';
             
             //overwrite / skip existing records
             if ($_POST['table_descriptions_overwrite_skip'] == 'Overwrite') {
@@ -327,7 +327,7 @@ if (!isset($_POST['posted'])) {
             }
             
             //close DB
-            include ('../include/dbconnclose.php');
+            include dirname(__FILE__) . '/../include/dbconnclose.php';
         }
         
         echo "<a href=\"import.php\">Import Another</a>";
@@ -365,7 +365,7 @@ if (!isset($_POST['posted'])) {
             echo "Comments: " . ((isset($data[8])) ? $data[8] : "") . "<br /><br />";
             
             //open DB
-            include '../include/dbconnopen.php';
+            include dirname(__FILE__) . '/../include/dbconnopen.php';
             
             //overwrite / skip existing records
             if ($_POST['variable_overwrite_skip'] == 'Overwrite') {
@@ -404,7 +404,7 @@ if (!isset($_POST['posted'])) {
             }
             
             //close DB
-            include ('../include/dbconnclose.php');
+            include dirname(__FILE__) . '/../include/dbconnclose.php';
         }
         
         echo "<a href=\"import.php\">Import Another</a>";

@@ -1,10 +1,10 @@
 <?php
-include 'classes/business_function.php';
-include 'classes/database.php';
-include 'classes/table.php';
-include 'classes/variable.php';
+include dirname(__FILE__) . '/classes/business_function.php';
+include dirname(__FILE__) . '/classes/database.php';
+include dirname(__FILE__) . '/classes/table.php';
+include dirname(__FILE__) . '/classes/variable.php';
 
-include 'include/header.php';
+include dirname(__FILE__) . '/include/header.php';
 
 ?>
 
@@ -29,11 +29,11 @@ include 'include/header.php';
             <ul>
                 <?php
                 //open DB
-                include 'include/dbconnopen.php';
+                include dirname(__FILE__) . '/include/dbconnopen.php';
                 $most_viewed_results = mysqli_query($cnnCDD, "Call Main_Most_Viewed()");
 
                 //close DB
-                include ('include/dbconnclose.php');                
+                include dirname(__FILE__) . '/include/dbconnclose.php';
                 ?>
                <?php
                 while ($result_element = mysqli_fetch_assoc($most_viewed_results)) {
@@ -89,7 +89,7 @@ include 'include/header.php';
         <div class="span6">
             <h1>About Metalicious</h1>
             <p>
-                Metalicious is an open-source, web-based data dictionary that is designed to cpature and display metadata from databases, tables, and fields for platforms with one or more datbases. Users may customize and deploy Metalicious as an internal or public data dictionary website. 
+                Metalicious is an open-source, web-based data dictionary that is designed to capture and display metadata from databases, tables, and fields for platforms with one or more datbases. Users may customize and deploy Metalicious as an internal or public data dictionary website. 
             </p>
 	    <p>
 		This project is a generic release of the City of Chicago's <a href="http://datadictionary.cityofchicago.org">data dictionary</a>.
@@ -97,4 +97,4 @@ include 'include/header.php';
         </div>
     </div> <!-- /row -->
 
-<?php include 'include/footer.php'; ?>
+<?php include dirname(__FILE__) . '/include/footer.php'; ?>

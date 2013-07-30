@@ -1,6 +1,34 @@
 <?php
+//debug
+ini_set('display_errors', 'On');
+error_reporting(E_ALL | E_STRICT);
 
-include 'widgets.php';
+include_once dirname(__FILE__) . '/../../classes/user.php';
+
+//get user_info if they exist
+if (isset($_COOKIE['user_id'])) {
+    $user_info = User::get_user_info($_COOKIE['user_id']);
+}
+
+//get permissions if they exist
+if (isset($_COOKIE['users_user_types'])) {
+    $users_user_types = unserialize(base64_decode($_COOKIE['users_user_types']));
+}
+
+//if the page is in the admin section
+if (substr($_SERVER['PHP_SELF'], 0, 7) == '/admin/') {
+    //if user is logged in
+    if (!isset($users_user_types)) {
+        header("Location: /");
+    } else {
+        //permissions test
+        if (!in_array('Administrator', $users_user_types)) {
+            header("Location: /");
+        }
+    }
+}
+
+include dirname(__FILE__) . '/widgets.php';
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +56,30 @@ include 'widgets.php';
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-	
+
+
+        <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+        <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+        <script type="text/javascript">
+            $(document).ajaxStart(function() {
+                $('#ajax_loader').fadeIn('slow');
+            });
+
+            $(document).ajaxStop(function() {
+                $('#ajax_loader').fadeOut('slow');
+            });
+        </script>
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-8633108-15']);
+            _gaq.push(['_trackPageview']);
+    
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
   </head>
 
 <body>
@@ -49,6 +100,35 @@ include 'widgets.php';
 				<img src="../images/metalicious_banner.png" />				</a>		
 			
 			<div class="nav-collapse">
+                            <ul class="nav pull-right">
+                                <li class="dropdown">
+                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="icon-user"></i> 
+                                    <?php echo $user_info['First_Name'] . " " . $user_info['Last_Name']; ?>
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <?php
+                                    if (isset($users_user_types)) {
+                                        //permissions test
+                                        if (in_array('Administrator', $users_user_types)) {
+                                            ?>
+                                            <li>
+                                                <a href="./">Admin</a>
+                                            </li>
+                                            <li>
+                                                <a href="./import.php">Import</a>
+                                            </li>
+                                            <?php
+                                        }
+                                    }
+                                    ?>
+                                    <li class="divider"></li>
+                                    <li><a href="../login.php?action=logout">Logout</a></li>
+                                </ul>
+                                </li>
+                            </ul>
+                                <!--
 				<ul class="nav pull-right">
 					<li class="dropdown">
 						
@@ -77,10 +157,10 @@ include 'widgets.php';
 						
 					</li>
 				</ul>
-			
-				<form class="navbar-search pull-right">
-					<input type="text" class="search-query" placeholder="Search">
-				</form>
+                                -->
+				<form class="navbar-search pull-right" method="post" action="../search.php">
+                                    <input type="text" class="search-query" placeholder="Search" id="search_criteria" name="search_criteria" />
+                                </form>
 				
 			</div><!--/.nav-collapse -->	
 	

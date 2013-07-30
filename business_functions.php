@@ -1,7 +1,7 @@
 <?php
-include '/classes/business_function.php';
+include dirname(__FILE__) . '/classes/business_function.php';
 
-include '/include/header.php';
+include dirname(__FILE__) . '/include/header.php';
 ?>
 <script>
     $(document).ready(function() {
@@ -60,4 +60,4 @@ include '/include/header.php';
     ?>
 </div>
 
-<?php include '/include/footer.php'; ?>
+<?php include dirname(__FILE__) . '/include/footer.php'; ?>

@@ -8,9 +8,9 @@
 /* The 'include' statements below do not point to the correct path. Including the correct path will create a "cannot redeclare class" error. Right now, it will generate a "Failed opening" warning.
 */
 
-include '../../classes/database.php';
-include '../../classes/table.php';
-include '../../classes/variable.php';
+include_once dirname(__FILE__) . '/../../classes/database.php';
+include_once dirname(__FILE__) . '/../../classes/table.php';
+include_once dirname(__FILE__) . '/../../classes/variable.php';
 
 /*********************************
  * Base class for admin widgets. 
