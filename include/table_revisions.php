@@ -1,5 +1,5 @@
 <?php
-include_once '../classes/table.php';
+include_once dirname(__FILE__) . '/../classes/table.php';
 
 //set DB ID
 if (isset($_POST['Table_ID'])) {

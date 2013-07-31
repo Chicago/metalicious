@@ -1,5 +1,5 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] . '/classes/variable.php';
+include_once dirname(__FILE__) . '/../classes/variable.php';
 
 //set DB ID
 if (isset($_POST['Variable_ID'])) {

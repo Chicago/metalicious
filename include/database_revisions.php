@@ -1,5 +1,5 @@
 <?php
-include_once 'classes/database.php';
+include_once dirname(__FILE__) . '/../classes/database.php';
 
 //set DB ID
 if (isset($_POST['Database_ID'])) {

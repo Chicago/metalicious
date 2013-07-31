@@ -33,7 +33,8 @@ class Business_Function
         $this->project_id = $project_id;
 
         //open DB
-        include $this->include_file_path . 'include/dbconnopen.php';
+        echo dirname(__FILE__) . '/../../include/dbconnopen.php';
+        include dirname(__FILE__) . '/../include/dbconnopen.php';
         $project_info = mysqli_query($cnnCHTime, "Call Project__Load_With_Project_ID('" . $this->project_id . "')");
         
         //set public variables
@@ -48,7 +49,7 @@ class Business_Function
         $this->project_created_date = $project_info_temp['Project_Created_Date'];
         
         //close DB
-        include $this->include_file_path . 'include/dbconnclose.php';
+        include dirname(__FILE__) . '/../include/dbconnclose.php';
         
         //return project info
         return $project_info;
@@ -75,11 +76,11 @@ class Business_Function
     public static function get_business_function_info($business_function_id)
     {
         //open DB
-        include 'include/dbconnopen.php';
+        include dirname(__FILE__) . '/../include/dbconnopen.php';
         $business_function_info = mysqli_query($cnnCDD, "Call Business_Function__Get_Business_Function_Info(" . $business_function_id . ")");
         
         //close DB
-        include 'include/dbconnclose.php';
+        include dirname(__FILE__) . '/../include/dbconnclose.php';
         
         //return table info
         return mysqli_fetch_assoc($business_function_info);
@@ -96,11 +97,11 @@ class Business_Function
     public static function get_business_function_info($business_function_id)
     {
         //open DB
-        include 'include/dbconnopen.php';
+        include dirname(__FILE__) . '/../include/dbconnopen.php';
         $business_function_info = mysqli_query($cnnCDD, "Call Business_Function__Get_Business_Function_Info(" . $business_function_id . ")");
         
         //close DB
-        include 'include/dbconnclose.php';
+        include dirname(__FILE__) . '/../include/dbconnclose.php';
         
         //return table info
         return mysqli_fetch_assoc($business_function_info);
@@ -115,11 +116,11 @@ class Business_Function
     public static function get_all_business_functions()
     {
         //open DB
-        include 'include/dbconnopen.php';
+        include dirname(__FILE__) . '/../include/dbconnopen.php';
         $all_business_functions = mysqli_query($cnnCDD, "Call Business_Function__Get_All_Business_Functions()");
         
         //close DB
-        include 'include/dbconnclose.php';
+        include dirname(__FILE__) . '/../include/dbconnclose.php';
         
         //return table info
         return $all_business_functions;
@@ -135,11 +136,11 @@ class Business_Function
     public static function get_business_function_databases($business_function_id)
     {
         //open DB
-        include 'include/dbconnopen.php';
+        include dirname(__FILE__) . '/../include/dbconnopen.php';
         $all_business_functions = mysqli_query($cnnCDD, "Call Business_Function__Get_All_Business_Function_Databases(" . $business_function_id . ")");
         
         //close DB
-        include 'include/dbconnclose.php';
+        include dirname(__FILE__) . '/../include/dbconnclose.php';
         
         //return table info
         return $all_business_functions;
@@ -157,13 +158,13 @@ class Business_Function
                                                  $database_id)
     {
         //open DB
-        include 'include/dbconnopen.php';
+        include dirname(__FILE__) . '/../include/dbconnopen.php';
         $error = mysqli_query($cnnCDD, "Call Business_Function__Add_Business_Function('"
                                             . addslashes($business_function_name)
                                             . "'," . $database_id . ")");
         
         //close DB
-        include 'include/dbconnclose.php';
+        include dirname(__FILE__) . '/../include/dbconnclose.php';
         
         return $error;
     }
@@ -180,13 +181,13 @@ class Business_Function
                                                     $database_id)
     {
         //open DB
-        include 'include/dbconnopen.php';
+        include dirname(__FILE__) . '/../include/dbconnopen.php';
         mysqli_query($cnnCDD, "Call Business_Function__Remove_Business_Function("
                                                 . $business_function_id
                                                 . "," . $database_id . ")");
         
         //close DB
-        include 'include/dbconnclose.php';
+        include dirname(__FILE__) . '/../include/dbconnclose.php';
     }
 }
 ?>

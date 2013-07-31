@@ -1,7 +1,7 @@
 <?php
-include_once 'classes/database.php';
-include_once 'classes/table.php';
-include_once 'classes/variable.php';
+include_once dirname(__FILE__) . '/../classes/database.php';
+include_once dirname(__FILE__) . '/../classes/table.php';
+include_once dirname(__FILE__) . '/../classes/variable.php';
 
 //if a new keyword is to be added
 if (isset($_POST['Keyword'])) {
@@ -44,7 +44,7 @@ while ($element_keyword = mysqli_fetch_assoc($element_keywords)) {
         <a href="javascript:;" title="Remove This Keyword" onclick="
                             if (confirm('Are you sure you want to remove this keyword?')) {
                                 $.post(
-                                    '../ajax/remove_keyword.php',
+                                    'ajax/remove_keyword.php',
                                     {
                                         Keyword: '<?php echo addslashes($element_keyword['Keyword']); ?>',
                                         Element_Type: '<?php echo $element_type; ?>',

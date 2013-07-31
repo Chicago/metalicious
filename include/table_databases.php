@@ -1,5 +1,5 @@
 <?php
-include_once '../classes/table.php';
+include_once dirname(__FILE__) . '/../classes/table.php';
 
 if (isset($_POST['Table_ID'])) {
     $table_id = $_POST['Table_ID'];
@@ -16,7 +16,7 @@ while ($parent_database = mysqli_fetch_assoc($parent_databases)) {
         <a href="javascript:;" title="Remove This Database" onclick="
                             if (confirm('Are you sure you want to delete this relationship?')) {
                                 $.post(
-                                    '../ajax/delete_database_table_relationship.php',
+                                    'ajax/delete_database_table_relationship.php',
                                     {
                                         Database_Table_ID: <?php echo $parent_database['Database_Table_ID']; ?>
                                     },

@@ -191,7 +191,7 @@ if (isset($users_user_types)) {
                         <a href="javascript:;" id="non_public_button" class="btn<?php echo ($table_info['Public'] == '0') ? ' btn-primary' : ' btn-mini'; ?>" style="vertical-align: top;"
                                onclick="
                                     $.post(
-                                        '/ajax/toggle_public_element.php',
+                                        'ajax/toggle_public_element.php',
                                         {
                                             Table_ID: <?php echo $table_info['Table_ID']; ?>,
                                             Public: 0

@@ -16,7 +16,7 @@ include dirname(__FILE__) . '/include/header.php';
 
     <div class="row-fluid">
         <h1>Search</h1>
-        <form action="/search.php" method="post">
+        <form action="search.php" method="post">
             <input type="text" id="search_criteria" class="main-search span5" name="search_criteria" style="margin: 0px;" value="<?php echo (isset($_POST['search_criteria'])) ? $_POST['search_criteria'] : ''; ?>" />
             <input type="submit" class="btn btn-primary" value="Search" />
         </form>

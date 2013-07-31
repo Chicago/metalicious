@@ -185,7 +185,7 @@ include 'include/header.php';
                                                          }"><i class="icon-ok"></i></a>
                                             <a href="javascript:;" onclick="if (confirm('Are you sure you want to delete this entry?')) {
                                                                                     $.post(
-                                                                                        'ajax/delete_revision.php',
+                                                                                        '../ajax/delete_revision.php',
                                                                                         {
                                                                                             element_type: 'database',
                                                                                             revision_id: <?php echo $orphan_database_revision['Database_Revision_ID']; ?>
@@ -352,7 +352,7 @@ include 'include/header.php';
                                                         }"><i class="icon-ok"></i></a>
                                             <a href="javascript:;" onclick="if (confirm('Are you sure you want to delete this entry?')) {
                                                                                     $.post(
-                                                                                        'ajax/delete_revision.php',
+                                                                                        '../ajax/delete_revision.php',
                                                                                         {
                                                                                             element_type: 'table',
                                                                                             revision_id: <?php echo $orphan_table_revision['Table_Revision_ID']; ?>

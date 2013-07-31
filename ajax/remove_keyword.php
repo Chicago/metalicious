@@ -1,5 +1,5 @@
 <?php
-include '../classes/keyword.php';
+include dirname(__FILE__) . '/../classes/keyword.php';
 
 Keyword::remove_keyword($_POST['Keyword'],
                         $_POST['Element_Type'],

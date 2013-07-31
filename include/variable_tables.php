@@ -1,5 +1,5 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] . '/classes/variable.php';
+include_once dirname(__FILE__) . '/../classes/variable.php';
 
 if (isset($_POST['Variable_ID'])) {
     $table_id = $_POST['Variable_ID'];
@@ -16,7 +16,7 @@ while ($parent_table = mysqli_fetch_assoc($parent_tables)) {
         <a href="javascript:;" onclick="
                             if (confirm('Are you sure you want to delete this relationship?')) {
                                 $.post(
-                                    '/ajax/delete_table_variable_relationship.php',
+                                    'ajax/delete_table_variable_relationship.php',
                                     {
                                         Table_Variable_ID: <?php echo $parent_table['Table_Variable_ID']; ?>
                                     },
