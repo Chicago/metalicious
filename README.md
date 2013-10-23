@@ -24,9 +24,9 @@ There is not a way to enter new users through the website in the current version
 INSERT INTO Users
 	(User_Name, Password, First_Name, Last_Name)
 VALUES
-	('_username-to-be-added_', '_password_', 'user-first-name', 'user-last-name');
+	('_username-to-be-added_', '_password_', '_user-first-name_', '_user-last-name_');
 ```
-Where the _italicized_ arguments will be inserted into the user account.
+Where the \_underscored\_ arguments will be inserted into the user account.
 
 Creating Business Functions
 ---------------------------
@@ -37,7 +37,7 @@ INSERT INTO Business_Functions
 VALUES
 	('_business-function-to-be-added_', '_business-function-description_');
 ```
-The _italic_ entries may be modified to fit your needs.
+The \_underscored\_ entries may be modified to fit your needs.
 
 Deploying Website
 -----------------
