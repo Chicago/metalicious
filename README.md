@@ -24,7 +24,7 @@ There is not a way to enter new users through the website in the current version
 INSERT INTO Users
 	(User_Name, Password, First_Name, Last_Name)
 VALUES
-	('_username-to-be-added_', '_password_', 'user-first-name', 'user-last-name');
+	('_username-to-be-added_', '_password_', '_user-first-name_', '_user-last-name_');
 ```
 Where the \_underscored\_ arguments will be inserted into the user account.
 
