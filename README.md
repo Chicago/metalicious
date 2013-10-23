@@ -26,7 +26,7 @@ INSERT INTO Users
 VALUES
 	('_username-to-be-added_', '_password_', 'user-first-name', 'user-last-name');
 ```
-Where the _italicized_ arguments will be inserted into the user account.
+Where the \_underscored\_ arguments will be inserted into the user account.
 
 Creating Business Functions
 ---------------------------
@@ -37,7 +37,7 @@ INSERT INTO Business_Functions
 VALUES
 	('_business-function-to-be-added_', '_business-function-description_');
 ```
-The _italic_ entries may be modified to fit your needs.
+The \_underscored\_ entries may be modified to fit your needs.
 
 Deploying Website
 -----------------
