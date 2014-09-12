@@ -23,6 +23,7 @@ class DataModelerXmlReader(object):
     master_xmlparent = ''
     master_xmlfile = ''
     master_xmlfiles = []
+    tables = {}
     columns = {}
     #col_tbl_db = {}
     dblist = tbllist = collist = []
@@ -175,95 +176,110 @@ class DataModelerXmlReader(object):
         return self.csv_output_folder
 
     def write_tableinfo_to_csv(self, tablename='', dbname='', output_folder=None):
-        '''This function is typically called by function read_xml_file(). 
-        Table-level information that has been saved by function read_xml_file can be exported to a CSV file for upload into Metalicious. '''
-        '''CSV columns: (1) Table name (2)Database name (aka "system") (3) Table description'''
-        csvfile = 'TblUpld_'
-        if(dbname !='' and dbname is not None):
-            csvfile = csvfile + dbname.strip() + '__' 
-        if(tablename !='' and tablename is not None):
+        '''This function is typically called by function read_xml_file(). It writes the current self.tables information to a CSV file that can be uploaded to the Metalicious website.
+        Table-level information that has been saved by function read_xml_file can be exported to a CSV file for upload into Metalicious.
+        CSV columns: (1) Database name (2) Table name (3) Table description'''
+        print("\nTop of write_tableinfo_to_csv(), table parm is '%s'" % (tablename))
+        csvfile = 'Tbl_'
+        #G.Sanders 9/2014 DO NOT include DB name in export CSV until we have a way of identifying the user-friendly DB name
+        # if dbname:
+        #    csvfile = csvfile + dbname.strip() + '__'
+        if tablename:
             csvfile = csvfile + tablename.strip() + '_'  
         csvfile = csvfile + self.current_xmlfile_name.lower().replace('.xml', '.csv')
-        self._define_csv_ouputfolder()		#Define the path where CSV files will be stored, and create that folder if it does not exist.
+        self._define_csv_ouputfolder()		            #Define the path where CSV files will be stored, and create that folder if it does not exist.
         csvfile_with_path = os.path.join(self.csv_output_folder, csvfile)
         self.logit("\n" + "CSV file location: " + self.csv_output_folder, True)
-        self.logit("New CSV file: " + csvfile, True)
-        if sys.version_info >= (3,0,0):         #FOR PYTHON3
+        self.logit("New TABLE CSV file: " + csvfile, True)
+        if sys.version_info >= (3,0,0):                 #FOR PYTHON3
             csvfile = open(csvfile_with_path, 'w', newline='')
         else:
             csvfile = open(csvfile_with_path, 'wb')
-        #with csvfile_with_path, "wb") as csvfile:
         with csvfile:
             csvwriter = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_ALL)    #, quoting=csv.QUOTE_MINIMAL
-            #for column in self.col_tbl_db:
-            #for key in mydic.keys():
-            for key, value in self.columns.items() :
+            hold_tbl = ""
+            for key, value in self.tables.items():
                 #If the current row matches the specified tablename (or if no tablename was specified), write the LIST associated with this Table/Column combination to the CSV file.
-                #KEYS for the self.columns DICT are a concatenation of Table and Column, delimited by tilde ~				
-                #VALUES for the self.columns dict are lists showing this column's database, table, column-name, alias, datatype, width, codebook and description.
+                #KEYS for the self.columns DICT are a concatenation of DB and Table, delimited by tilde ~
+                #EACH VALUE in the self.tables dict is a list showing this table's database and description.
+                #print("Next TABLE in self.tables: %s" % (value))
                 tilde = key.find('~')
                 if(tilde > -1):
-                    self.logit("String '" + key + "' delimited at tilde " + str(tilde) + "... '" + key[:tilde] + "' and '" + key[tilde+1:] + "'")
-                    if( tablename == '' or ( tablename != '' and key[:tilde].lower() == tablename.lower() ) ):
-                        #This is where the CSV row is written to the file:
-                        csvwriter.writerow([ "(db here)", value[1], "(description of table goes here)", value[0] ])      #Key for this dict is a concatenation of TABLE + '~' + COLUMN. key[:tilde] is the TABLE and key[tilde+1:] is the COLUMN
-            csvfile.close()				
+                    #self.logit("In write_tableinfo(), String '" + key + "' delimited at tilde " + str(tilde) + "... '" + key[:tilde] + "' and '" + key[tilde+1:] + "'")
+                    if not dbname or (dbname and key[:tilde].lower() == dbname.lower()):            #If no DB name was found, or the DB name found MATCHES the specified DbName parameter.
+                        current_tbl = str(value[1])               #TableName is the 2nd value in the values list
+                        if current_tbl.strip().lower() == tablename.strip().lower() and current_tbl != hold_tbl:                  #In the TABLES csv file, we write out each data table ONLY ONCE (which means this CSV normally has only ONE ROW).
+                            self.logit("\nIn write_tableinfo(), writing row for Table '%s'" % (current_tbl) )
+                            #This is where the CSV row is written to the file:
+                            csvwriter.writerow(["(db here)", value[1], value[2], value[0] ])        #Key for this dict is a concatenation of DB + '~' + TABLE. key[:tilde] is the DB and key[tilde+1:] is the TABLE
+                            hold_tbl = value[1]
+            csvfile.close()
             return 1
 
 
     def write_columninfo_to_csv(self, tablename='', dbname='', output_folder=None):
         '''This function is typically called by function read_xml_file(). 
-        Column-level information that has been saved by function read_xml_file can be exported to a CSV file for upload into Metalicious. '''
-        '''CSV columns: (1) Table name (2)Database name (aka "system") (3) Column name (4) Data type (5) Column width (6) Codebook for this column (7) Caption for this column. ''' 
+        Column-level information that has been saved by function read_xml_file can be exported to a CSV file for upload into Metalicious.
+        CSV columns: (1) Table name (2)Database name (aka "system") (3) Column name (4) Data type (5) Column width (6) Codebook for this column (7) Caption for this column. '''
+        print("\nTop of write_columninfo_to_csv(), table parm is '%s'" % (tablename))
         csvfile = 'VarUpld_'
-        if(dbname !='' and dbname is not None):
-            csvfile = csvfile + dbname.strip() + '__' 
+        #G.Sanders 9/2014 DO NOT include DB name in export CSV until we have a way of identifying the user-friendly DB name
+        #if(dbname !='' and dbname is not None):
+        #    csvfile = csvfile + dbname.strip() + '__'
         if(tablename !='' and tablename is not None):
             csvfile = csvfile + tablename.strip() + '_'  
         csvfile = csvfile + self.current_xmlfile_name.lower().replace('.xml', '.csv')
         self._define_csv_ouputfolder()		#Define the path where CSV files will be stored, and create that folder if it does not exist.
         csvfile_with_path = os.path.join(self.csv_output_folder, csvfile)
-        self.logit("\n" + "CSV file location: " + self.csv_output_folder, True)
+        self.logit("CSV file location: " + self.csv_output_folder, True)
         self.logit("New CSV file: " + csvfile, True)
         if sys.version_info >= (3,0,0):         #FOR PYTHON3
             csvfile = open(csvfile_with_path, 'w', newline='')
         else:
             csvfile = open(csvfile_with_path, 'wb')
-        #with csvfile_with_path, "wb") as csvfile:
         with csvfile:
             csvwriter = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_ALL)    #, quoting=csv.QUOTE_MINIMAL
-            #for column in self.col_tbl_db:
-            #for key in mydic.keys():
             for key, value in self.columns.items() :
                 #If the current row matches the specified tablename (or if no tablename was specified), write the LIST associated with this Table/Column combination to the CSV file.
                 #KEYS for the self.columns DICT are a concatenation of Table and Column, delimited by tilde ~				
                 #VALUES for the self.columns dict are lists showing this column's database, table, column-name, alias, datatype, width, codebook and description.
-                tilde = key.find('~')
-                if(tilde > -1):
-                    self.logit("String '" + key + "' delimited at tilde " + str(tilde) + "... '" + key[:tilde] + "' and '" + key[tilde+1:] + "'")
-                    if( tablename == '' or ( tablename != '' and key[:tilde].lower() == tablename.lower() ) ):
+                tilde_pos = key.find('~')
+                if(tablename and tilde_pos > -1):
+                    current_tbl = key[:tilde_pos]
+                    #self.logit("In write_columninfo(), seeking table '%s', found current_tbl '%s'. String '%s' delimited at tilde %s... '%s' and '%s'"  % (tablename, current_tbl, key, tilde_pos, key[:tilde_pos], key[tilde_pos+1:]), True)
+                    if current_tbl.strip().lower() == tablename.strip().lower():
+                        self.logit("In write_columninfo(), writing row for Table '%s' and value '%s %s'" % (current_tbl,  value[1], value[2]), True )
                         #This is where the CSV row is written to the file:
-                        csvwriter.writerow([ "(db here)", value[1], value[2], value[3], value[4], value[5], value[6], value[0] ])      #Key for this dict is a concatenation of TABLE + '~' + COLUMN. key[:tilde] is the TABLE and key[tilde+1:] is the COLUMN
+                        csvwriter.writerow([ "(db here)", value[1], value[2], value[3], value[4], value[5], value[6], value[0] ])      #Key for this dict is a concatenation of TABLE + '~' + COLUMN. key[:tilde_pos] is the TABLE and key[tilde_pos+1:] is the COLUMN
+                    else:
+                        pass  #print("Too bad, '%s' does not equal '%s'" % (tablename, current_tbl))
             csvfile.close()				
             return 1
 
 
     def read_xml_file(self, xmlfile_with_path, write_to_csv=True):
-        self.logit("\n" + "*****************************************")
-        self.logit("\n" + xmlfile_with_path + "\n")
+        self.logit("\n" + "*****************************************READING NEXT XML FILE***************************")
+        self.logit(xmlfile_with_path)
+        self.logit("************************************************************************************************")
         head, tail = os.path.split(xmlfile_with_path)
         self.current_xmlfile_path = head
         self.current_xmlfile_name = tail
-        datatype = columnwidth = comment = descrip = codebook = section = holddb = holdtable = columnname = ''
-        templist = []                    
+        datatype = columnwidth = comment = coldescrip = codebook = section = holddb = holdtable = columnname = tbldescrip = ''
+        temp_col_list = []
+        temp_tbl_list = []
         with open(xmlfile_with_path, "r") as f:
             count_col = 0
-            content = f.readlines()
+            content = f.readlines()          #Load the contents of the XML file into a list
+            ln = 0
             for line in content:
-                self.logit(line)
+                #self.logit(line)
+                #self.logit("\nRow %s) Current section: '%s'" % (ln, section), True)
+                self.logit("Row %s)" % (ln), True)
                 parentobj = childobj = ''
-                #XML file is divided into a TABLE section and a COLUMNS section.
+                '''XML file is divided into a TABLE section and a COLUMNS section.
+                In Table section, Table is the child and DB is the parent. In Columns section, Column is the child and Table is the Parent.'''
                 if(line.lower().find('<table') > -1):
+                    print("Found the TABLE SECTION")
                     section = 'table' 
                     parent_type = 'Database'
                     child_type = 'Table'
@@ -271,72 +287,112 @@ class DataModelerXmlReader(object):
                     section = 'column'
                     parent_type = 'Table'
                     child_type = 'Column'
+                elif(line.lower().find('<fonts') > -1):
+                    section = 'font'
+                elif(line.lower().find('<indexes') > -1):
+                    section = 'index'
+                #print("%s)Current section: '%s'" % (ln, section))
 
-                if(line.find('sourceObjSchema') > -1):
+                if(line.lower().find('<table') > -1):
+                    if(line.find(' name="') > -1):
+                        childobj = str(line[line.find(' name="'):]).replace(' name="', '').replace('">', '').replace(chr(9),'').replace(chr(10),'').replace(chr(13),'')
+                        print("\nIn TableSection, ChildObj is '%s' with type '%s'" % (childobj, child_type))
+                elif(line.find('schemaObject') > -1):
+                    parentobj = self.get_value_for_xml_tag(line, 'schemaObject')
+                elif(line.find('sourceObjSchema') > -1):                   #sourceObjSchema tag value is the Table Name if this is a Columns section
                     parentobj = self.get_value_for_xml_tag(line, 'sourceObjSchema')
-                    self.logit("\n" + "NEXT PARENT MATCH (" + parent_type + "): " + parentobj)
-                elif(line.find('sourceObjName') > -1):
+                    #self.logit("\n" + "NEXT PARENT MATCH (" + parent_type + "): " + parentobj)
+                elif(line.find('sourceObjName') > -1):                   #sourceObjName is the Column Name
                     childobj = self.get_value_for_xml_tag(line, 'sourceObjName')
-                    self.logit("NEXT CHILD MATCH (" + child_type + "): " + childobj)
-                elif(line.find('logicalDatatype') > -1):
+                    #self.logit("NEXT CHILD MATCH (" + child_type + "): " + childobj)
+                elif(line.find('logicalDatatype') > -1):                 #logicalDatatype is the data type, which is in a DM-specific format
                     datatype = self.get_value_for_xml_tag(line, 'logicalDatatype')
                     datatype = self.get_datatype_from_dmdtype(datatype)
-                elif(line.find('dataTypeSize') > -1):
+                elif(line.find('dataTypeSize') > -1):                    #dataTypeSize is the byte width for this data column
                     columnwidth = self.get_value_for_xml_tag(line, 'dataTypeSize')
-                elif(line.find('comment') > -1):
+                elif(line.find('comment') > -1):                         #Comment tag is important because we read it, and sometimes write it.
                     comment = self.get_value_for_xml_tag(line, 'comment')
-                    #Comment should be divided into two sections, if the user included both DESCRIPTION and CODEBOOK narrative in this space.
-                    print("\n" + "Codebook keyword found at position: " + str(comment.upper().find('CODEBOOK')) )
-                    if(comment.upper().find('CODEBOOK') > -1):
-                        cdbkpos = comment.upper().find('CODEBOOK')
-                        descrip = comment[:cdbkpos -1]
-                        codebook = comment.replace(descrip, '')
-                        codebook = codebook[10:].strip()                  #Remove the word "Codebook"
-                    else: 
-                        codebook = ''
-                        descrip = comment
-                    print("\n" + "Comment: '" + comment + "' ...  Descrip: '" + descrip + "' .... Codebook: '" + codebook + "'")
-                if(parentobj != '' or childobj != ''):
-                    '''Table section has only table-level attributes (including its parent database) '''
                     if(section == 'table'):
-                        if(parentobj != ''):
+                        tbldescrip = comment
+                    elif(section == 'column'):
+                        #Column comment should be divided into two sections, if the user included both DESCRIPTION and CODEBOOK narrative in this space.
+                        codebook_pos = comment.upper().find('CODEBOOK')
+                        if codebook_pos:
+                            print("Codebook keyword found at position: %s" % (codebook_pos) )
+                            coldescrip = comment[:codebook_pos]
+                            codebook = comment.replace(coldescrip, '')
+                            codebook = codebook[10:].strip()                  #Remove the word "Codebook"
+                        else:
+                            codebook = ''
+                            coldescrip = comment
+                    print("Comment: '" + comment + "' ...  Descrip: '" + coldescrip + "' .... Codebook: '" + codebook + "'")
+
+                #If a parent or child object has been located, store the value
+                if(parentobj or childobj):                    #Either a Parent or a Child object (or both) found
+                    print("Parentobj: '%s', ChildObj: '%s', Section: '%s'" % (parentobj, childobj, section))
+                    '''Table section has only table-level attributes (including its parent database) '''
+                    if(section == 'table'):                   #Currently reading lines within the <Table tag, before we encounter the <columns> collection
+                        if(parentobj):
                             holddb = parentobj
-                        if(childobj != ''):
+                            print("HoldDB: '%s'" % (holddb))
+                        if(childobj):
                             holdtable = childobj
-                    elif(section == 'column'): 
+                            print("HoldTable: '%s'" % (holdtable))
+                    elif(section == 'column'):
                         '''Column section has column-level attributes '''  
-                        if(childobj != ''):
+                        if(parentobj):
+                            holdtable = parentobj
+                            print("HoldTable-- '%s'" % (holdtable))
+                        if(childobj):
 							#Store information about this table-column combination in a dict:
                             #self.col_tbl_db['db_' + holddb + '___tbl_' + holdtable + '___col_' + str(count_col)] = childobj
                             columnname = childobj            #Text found in the "sourceObjName" element
                             #self.col_tbl_db[holdtable + '~' + columnname] = holddb
                             count_col = count_col + 1
                 #End of metadata about this COLUMN
-                if(line.find('</Column>') > -1):
-                    templist.append(holddb.upper())       	 #0 - database (actual name)
-                    templist.append(str(holdtable).upper() ) #1 - table 
-                    templist.append(columnname)              #2 - column 
-                    templist.append(datatype)   	         #3 - datatype
+                #***********************************************************************************************************
+                #Write the TABLE metadata into self.tables
+                if(line.lower().find('<columns') > -1):           #String "<columns" is found in this line, signifying the END of the table description section. Write the current TABLE information to a list now.
+                    temp_tbl_list.append(holddb.upper())       	  #0 - database (actual name, not the user-friendly Metalicious DB name)
+                    temp_tbl_list.append(str(holdtable).upper() ) #1 - table
+                    temp_tbl_list.append(str(tbldescrip))         #2 - table description
+                    #Store the temp_tbl_list[] variables to a dictionary-type class property called self.tables
+                    self.tables[holddb + '~' + holdtable] = temp_tbl_list         #db + '~' + table is the key, while the entire 'temp_tbl_list' attribute list is the 'value' of the dict item.
+                    #blank out the placeholder variables, or their values will carry over into the next TABLE section
+                    tbldescrip = ''
+                    temp_tbl_list = []
+                #***********************************************************************************************************
+                #Write the COLUMN metadata into self.columns
+                if(line.find('</Column>') > -1):                  #String "</Column>" is found in this line, signifying the END of a column description section.
+                    temp_col_list.append(holddb.upper())          #0 - database (actual name, not the user-friendly Metalicious DB name)
+                    temp_col_list.append(str(holdtable).upper() ) #1 - table
+                    temp_col_list.append(columnname)              #2 - column
+                    temp_col_list.append(datatype)   	          #3 - datatype
                     columnwidth = columnwidth.upper().replace("BYTES", "").replace("BYTE", "").strip()
-                    templist.append(columnwidth)  	         #4 - column-width
-                    templist.append(codebook)   	         #5 - codebook (valid values and their code definitions)
-                    templist.append(descrip)  		         #6 - description of this column ("variable"
-                    #Store the templist[] variables to a dictionary-type class property called self.columns, which stores ALL columns found.
-                    self.columns[holdtable + '~' + columnname] = templist         #table + '~' + column is the key, while the entire 'templist' attribute list is the 'value' of the dict item.
+                    temp_col_list.append(columnwidth)  	          #4 - column-width
+                    temp_col_list.append(codebook)   	          #5 - codebook (valid values and their code definitions)
+                    temp_col_list.append(coldescrip)  		          #6 - description of this column ("variable")
+                    #Store the temp_col_list[] variables to a dictionary-type class property called self.columns, which stores ALL columns found.
+                    self.columns[holdtable + '~' + columnname] = temp_col_list         #table + '~' + column is the key, while the entire 'temp_col_list' attribute list is the 'value' of the dict item.
                     #IMPORTANT: blank out the placeholder variables, or their values will carry over into the next COLUMN section (and they won't be overwritten if the next column section lacks tags for some of the attributes!)
-                    columnname = datatype = columnwidth = comment = descrip = codebook = ''
-                    templist = [] 
-                    
-                #End of COLUMNS section.  If specified, write metadata for the COLUMNS in this TABLE to a CSV file.
-                if(line.find('</columns>') > -1): 
-                    if(write_to_csv):
-                        self.write_tableinfo_to_csv(holdtable, holddb)
-                        self.write_columninfo_to_csv(holdtable, holddb)
-            
+                    columnname = datatype = columnwidth = comment = coldescrip = codebook = ''
+                    temp_col_list = []
+
+                if(line.lower().find('</columns>') > -1):        #End of the relevant sections in this XML file
+                    self.debug_display_table_list()
+                    self.debug_display_column_list
+                ln += 1
+
+        #Write the information from this XML file to CSV files (one file for Table-level info, one file for Column-level info):
+        if write_to_csv:
+            self.write_tableinfo_to_csv(holdtable, holddb)
+            self.write_columninfo_to_csv(holdtable, holddb)
+
             return 1
 
     def read_all_xml_files(self, parent_folder, output_folder=None):
-        '''detailed information about the items exported from an Oracle Data Modeler DMD projec t can be found in an XML file buried deep in the folders beneath the .DMD file'''
+        '''Detailed information about the items exported from an Oracle Data Modeler DMD project can be found in an XML file buried deep in the folders beneath the .DMD file.
+        First locate the relevant XML files, then parse the elements of those files and store the information contained therein to a CSV file.'''
         if(self.initialized == False):
             self.initialize()
         if(output_folder=='' or output_folder is None):
@@ -373,16 +429,23 @@ class DataModelerXmlReader(object):
             self.read_xml_file(xmlfile)
         #***************************************************************************************************************
         #self.columns stores the column-level metadata for ALL XML files within the folder being searched.
-        self.logit("\n \n" + "---------COLUMNS FOUND (keys are a concatenation of Table and Column; values are attributes of the COLUMN. Items appear in no particular order because this is a DICTIONARY.)----------------------------------")
-        #for key, value in self.columns.iteritems():
+        self.logit("\n \n" + "---------ALL COLUMNS FOUND (keys are a concatenation of Table and Column; values are attributes of the COLUMN. Items appear in no particular order because this is a DICTIONARY.)----------------------------------")
         for key, value in self.columns.items():		  #FOR PYTHON3
-            self.logit(value) 
-        #self.logit(self.col_tbl_db)
+            self.logit(value)
+
+        # *******************************************************************************************
+        #If specified, write metadata for the TABLE, and the COLUMNS in this TABLE, to a CSV file.
+        self.debug_display_table_list()
+        self.debug_display_column_list()
+        #if(write_to_csv):
+            #self.write_tableinfo_to_csv(holdtable, holddb)
+            #self.write_columninfo_to_csv(holdtable, holddb)
+
         #self.logit('\n' + 'Find database_business_functions~business_function_id: ' + self.col_tbl_db['database_business_functions~business_function_id'])
         #If log file was opened, close it before exiting.			
         if(self.logfile_is_open):
             self.close_logfile()
-        #return 1
+
         return output_folder
 
     def update_metadata_in_dmd(self, dmd_file_with_path, object_type, object_name, attributes):
@@ -470,10 +533,24 @@ class DataModelerXmlReader(object):
         
         return success
 
+    def debug_display_table_list(self):
+        self.logit("\nTABLES LIST", True)
+        for key, value in self.tables.items() :
+            self.logit("Key: %s, Value: %s" % (key, value), True)
+
+    def debug_display_column_list(self):
+        self.logit("\nCOLUMNS LIST", True)
+        for key, value in self.columns.items() :
+            self.logit("Key: %s, Value: %s" % (key, value), True)
+
+
 #------------------------------------------------------------------------------------
 if(__name__ == '__main__'):
     print('About to create an instance of DataModelerXmlReader class.')
     xmlr = DataModelerXmlReader()
     #xmlr.read_all_xml_files('C:\\Greg\\ChapinHall\\DataModeler\\metalicious\\Metalicious_Modelled')
-    xmlr.read_all_xml_files('C:\\Greg\\ChapinHall\\DataModeler\\testdb')
+    #xmlr.read_all_xml_files('C:\\Greg\\ChapinHall\\DataModeler\\testdb')
     #xmlr.read_all_xml_files('C:\\Greg\\ChapinHall\\DataModeler\\MetaDash')
+    #xmlr.read_all_xml_files('C:\\Greg\\ChapinHall\\Metalicious\\DMDs_Sept2014\\DoIT\\CDPH online ordering')
+    #xmlr.read_all_xml_files('C:\\Greg\\ChapinHall\\Metalicious\\DMDs_Sept2014\\DoIT\\CDPH Voucher Processing\\vouchers.dmd')
+    xmlr.read_all_xml_files('C:\\Greg\\ChapinHall\\Metalicious\\DMDs_Sept2014\\DoIT\\Event Management\Event_management.dmd')

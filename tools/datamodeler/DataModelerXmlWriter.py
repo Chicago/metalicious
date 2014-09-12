@@ -9,7 +9,7 @@ import csv
 class DataModelerXmlWriter(object):
     testmode = True
     initialized = False
-    testmode = False
+    testmode = True
     error_message = ''
     logfile = ''
     logfile_handle = None
@@ -312,7 +312,8 @@ if(__name__ == '__main__'):
     print('About to create an instance of DataModelerXmlWriter class.')
     xmlw = DataModelerXmlWriter()
     attributes = {}
-    attributes = {'datatype': 'varchar', 'columnwidth': '765', 'comment': 'OVERWRITING the existing comment with this much better comment'}
-    xmlw.update_metadata_in_dmd('C:\\Greg\\ChapinHall\\DataModeler\\testdb\\rel\\BD830649-A98E4273A620\\table\\seg_0\\12C65BAE-1C35-2088-FD4D-2507DCA10C5E.xml', 'Column', 'test_char', attributes)
+    #attributes = {'datatype': 'varchar', 'columnwidth': '765', 'comment': 'OVERWRITING the existing comment with this much better comment'}
+    #xmlw.update_metadata_in_dmd('C:\\Greg\\ChapinHall\\DataModeler\\testdb\\rel\\BD830649-A98E4273A620\\table\\seg_0\\12C65BAE-1C35-2088-FD4D-2507DCA10C5E.xml', 'Column', 'test_char', attributes)
+    attributes = {'datatype': 'varchar', 'columnwidth': '765', 'comment': 'OVERWRITING the existing comment for column TEST_INT with this brand new one'}
+    xmlw.update_metadata_in_dmd('C:\\Greg\\ChapinHall\\DataModeler\\testdb\\rel\\BD830649-A98E4273A620\\table\\seg_0\\12C65BAE-1C35-2088-FD4D-2507DCA10C5E.xml', 'Column', 'test_int', attributes)
     
-    #xmlw.read_all_xml_files('C:\\Greg\\ChapinHall\\DataModeler\\MetaDash')
