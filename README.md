@@ -87,14 +87,23 @@ Adding a new system or revising an existing system
 
 Importing a table
 -----------------
-
+1.	Steps to take to get file ready for importing
++	See examples of the [table file](data-examples/CongregateDiningMealCount_tables.csv) derived from the [City of Chicago Congregate Dining Meal Application](http://datadictionary.cityofchicago.org/database_info.php?database_id=58)
++	Copy all relevant fields (system, table, column/field, type, length, value range, description, examples, comments) with no header row and paste into a separate excel file and save as CSV (comma delimited) file.
++	The System name in the file must match exactly how the system is named in the website.  For example, if the system is titled “Attendance System” in the website, the spreadsheet must have “Attendance System” listed under the system column.
+2.	Log into website
+3.	Select “import” from the drop down list under your name 
+4.	Select the “browse” button under the second option - Choose your Tables.csv file and then click on the submit button
+5.	Add the appropriate variable CSV file
+6.	Select “submit”
 
 
 Importing a variable
 ---------------------
 1.	Steps to take to get file ready for importing
++	See examples of the [variable file](data-examples/CongregateDiningMealCount_variables.csv) derived from the [City of Chicago Congregate Dining Meal Application](http://datadictionary.cityofchicago.org/database_info.php?database_id=58)
 +	Copy all relevant fields (system, table, column/field, type, length, value range, description, examples, comments) with no header row and paste into a separate excel file and save as CSV (comma delimited) file.
-+	The System name in the file must match exactly how the system is named in the website.  For example, if the system is titled “Attendance System” in the website, the spreadsheet must have “Attendance System” listed under the system column.  
++	The System name in the file must match exactly how the system is named in the website.  For example, if the system is titled “Attendance System” in the website, the spreadsheet must have “Attendance System” listed under the system column.
 2.	Log into website
 3.	Select “import” from the drop down list under your name 
 4.	Select the “browse” button under the second option - Choose your Variables.csv file and then click on the submit button
