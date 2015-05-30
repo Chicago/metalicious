@@ -9,6 +9,7 @@ This project is a generic release of the [City of Chicago's data dictionary](htt
 Metalicious has not gone through broad deployment testing. Below are the specifications which this project was built. We appreciate feedback on other platforms which Metalicious does and does not operate.
 
 Severs hosting this project requires. This project was developed with the following specifications:
+
 - MySQL Community Server 5.5.25a
 - PHP 5.4.5
 
