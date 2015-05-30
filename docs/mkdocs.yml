@@ -1,15 +1,12 @@
 site_name: metalicious
+pages:
+	- ['Introduction': 'index.md']
+	- ['Installation': 'installation.md']
+	- ['Adding Data': 'adding-data.md']
+
+theme: readthedocs
 
 repo_url: https://github.com/Chicago/metalicious
 
-pages:
-	- 'Introduction': 'index.md'
-	- 'Installation': 'installation.md'
-
-markdown_extensions:
-   	- toc:
-        permalink: ""
-    - admonition:
-
-copyright: Copyright &copy; 2014, <a href="https://twitter.com/_tomchristie">Tom Christie</a>. Maintenance and development by <a href="http://www.dougalmatthews.com/">Dougal Matthews</a>
+copyright: Copyright &copy; 2014, <a href="https://cityofchicago.org">City of Chicago</a>. 
 google_analytics: ['UA-27795084-5', 'mkdocs.org']
