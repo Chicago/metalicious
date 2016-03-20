@@ -1,4 +1,4 @@
-# <metalicious /> |release|
+# Metalicious
 
 $project is an open-source, web-based data dictionary that is designed to capture and display metadata from databases, tables, and fields for platforms with one or more databases. Users may customize and deploy Metalicious as an internal or public data dictionary website.
 
