@@ -1,1 +1,10 @@
-site_name: My Docs
+site_name: metalicious
+theme: readthedocs
+pages:
+	- 'index.md'
+	- 'installation.md'
+	- 'adding-data.md'
+repo_url: https://github.com/Chicago/metalicious
+site_url: http://datadictionary.cityofchicago.org
+site_author: City of Chicago
+copyright: Copyright &copy; 2014 - 2016, <a href="https://cityofchicago.org">City of Chicago</a> and licensed under <a href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a>.. 
